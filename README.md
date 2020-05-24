@@ -1,4 +1,4 @@
-# Lumen API JWT
+# Lumen API JWT + Docker
 
 This API run with docker. It creates 3 containers ( app, webserver and mysql).
 

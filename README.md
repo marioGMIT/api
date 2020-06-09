@@ -6,9 +6,37 @@ Server running on the port 8015.
 DB running on the port 5002.
 You can change the ports in the docker-composer file.
 
-## Add fake data
+## Steps to follow
 
-Run php artisan db:seed
+// Cloning repository
+1- git clone https://github.com/marioGMIT/api.git
+
+// Running the containers (DOCKER). Check DB configuration for production.
+2- cd api && docker-compose up -d
+
+// Having access to the app container
+3- docker exec -it app bash
+
+// Installing packages within the container
+4- composer install
+
+// Generating JWT within the container and creating tables
+5- php artisan jwt:secret
+6- php artisan migrate
+
+// Want fake data for users? Run the next command
+7- php artisan db:seed
+
+## TEST API
+
+In the repository is included a postman file. 
+
+1- Open Postman and import the file
+
+2- Run the request 'register'
+
+If you get as a response the new user.. everything is working fine. In order to use the rest of the request you need to get the token previosly and set it in the authorization. 
+
 
 ## If you want to connect the API to an existing DB container replace in docker-compose file this:
 
@@ -22,6 +50,16 @@ networks:
   default:
     external:
       name: name_of_your_current_db_container
+
+## TODO
+
+- enviroment postman
+- get token automatically
+
+
+## Notice
+
+- Expires of JWT is too high. You can reduce it on App\Http\Controllers\Controllers.php
 
 
 [![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
